@@ -3,15 +3,15 @@
 	<parent>
 		<artifactId>deps</artifactId>
 		<groupId>com.godmonth</groupId>
-		<version>0.8.1</version>
+		<version>0.8.5</version>
 	</parent>
 	<groupId>com.godmonth</groupId>
 	<artifactId>godmonth-commons</artifactId>
-	<version>0.3.1</version>
+	<version>0.3.1-SNAPSHOT</version>
 	<scm>
-		<connection>scm:svn:https://godmonth.googlecode.com/svn/trunk/godmonth-commons</connection>
-		<developerConnection>scm:svn:https://godmonth.googlecode.com/svn/trunk/godmonth-commons</developerConnection>
-		<url>http://code.google.com/p/godmonth/source/browse/</url>
+		<connection>scm:git:git@github.com:godmonth/godmonth-commons.git</connection>
+		<developerConnection>scm:git:git@github.com:godmonth/godmonth-commons.git</developerConnection>
+		<url>http://godmonth@github.com/godmonth/godmonth-commons.git</url>
 	</scm>
 	<dependencies>
 		<dependency>
