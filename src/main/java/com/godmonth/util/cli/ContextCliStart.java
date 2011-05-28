@@ -10,7 +10,7 @@ public class ContextCliStart {
 		while (true) {
 			try {
 				Thread.sleep(30000000);
-			} catch (InterruptedException e) {
+			} catch (Exception e) {
 			}
 		}
 
