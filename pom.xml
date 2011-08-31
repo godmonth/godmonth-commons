@@ -4,11 +4,10 @@
 	<parent>
 		<artifactId>deps</artifactId>
 		<groupId>com.godmonth</groupId>
-		<version>0.8.6-SNAPSHOT</version>
+		<version>0.9-SNAPSHOT</version>
 	</parent>
-	<groupId>com.godmonth</groupId>
 	<artifactId>godmonth-commons</artifactId>
-	<version>0.3.2-SNAPSHOT</version>
+	<version>0.4-SNAPSHOT</version>
 	<scm>
 		<connection>scm:git:git@github.com:godmonth/godmonth-commons.git</connection>
 		<developerConnection>scm:git:git@github.com:godmonth/godmonth-commons.git</developerConnection>
@@ -16,8 +15,8 @@
 	</scm>
 	<dependencies>
 		<dependency>
-			<groupId>commons-lang</groupId>
-			<artifactId>commons-lang</artifactId>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
 			<optional>true</optional>
 		</dependency>
 		<dependency>
