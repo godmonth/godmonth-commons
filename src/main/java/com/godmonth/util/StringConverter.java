@@ -1,6 +1,6 @@
 	package com.godmonth.util;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 
 public class StringConverter {
 	private StringConverter() {
