@@ -1,6 +1,6 @@
 package com.godmonth.util;
 
-import org.apache.commons.lang.ArrayUtils;
+import org.apache.commons.lang3.ArrayUtils;
 
 public class ArrayAssistance {
 	public static void fill(byte[] target, int offset, byte[] source) {

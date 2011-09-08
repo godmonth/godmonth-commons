@@ -1,6 +1,6 @@
 package com.godmonth.util.wicket.ajax;
 
-import org.apache.commons.lang.ObjectUtils;
+import org.apache.commons.lang3.ObjectUtils;
 import org.apache.wicket.Component;
 import org.apache.wicket.ajax.calldecorator.AjaxCallDecorator;
 
