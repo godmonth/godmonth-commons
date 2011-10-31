@@ -13,7 +13,7 @@
 		<developer>
 			<email>link2people@gmail.com</email>
 		</developer>
-	</developers>
+	</developers> 
 	<licenses>
 		<license>
 			<name>The Apache Software License, Version 2.0</name>
@@ -87,7 +87,7 @@
 			<dependency>
 				<groupId>com.godmonth</groupId>
 				<artifactId>deps</artifactId>
-				<version>1.1-SNAPSHOT</version>
+				<version>1.1</version>
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
