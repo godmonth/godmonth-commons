@@ -7,22 +7,22 @@ import java.util.Map;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;
 
-@SuppressWarnings("unchecked")
-public class ListenerRegistration implements InitializingBean, DisposableBean {
+public class ListenerRegistration<T> implements InitializingBean,
+		DisposableBean {
 
-	private Map<ListenersHolder, Collection> multiListenerHolder = new HashMap<ListenersHolder, Collection>();
-	private Map<SingleListenerHolder, Object> singleListenerHolder = new HashMap<SingleListenerHolder, Object>();
+	private Map<ListenersHolder<T>, Collection<T>> multiListenerHolder = new HashMap<ListenersHolder<T>, Collection<T>>();
+	private Map<SingleListenerHolder<T>, T> singleListenerHolder = new HashMap<SingleListenerHolder<T>, T>();
 
 	public void afterPropertiesSet() throws Exception {
-		for (ListenersHolder lr : multiListenerHolder.keySet()) {
+		for (ListenersHolder<T> lr : multiListenerHolder.keySet()) {
 			if (lr != null) {
-				for (Object object : multiListenerHolder.get(lr)) {
+				for (T object : multiListenerHolder.get(lr)) {
 					lr.addListener(object);
 				}
 
 			}
 		}
-		for (SingleListenerHolder slr : singleListenerHolder.keySet()) {
+		for (SingleListenerHolder<T> slr : singleListenerHolder.keySet()) {
 			if (slr != null) {
 				slr.setListener(singleListenerHolder.get(slr));
 			}
@@ -30,12 +30,12 @@ public class ListenerRegistration implements InitializingBean, DisposableBean {
 	}
 
 	public void destroy() throws Exception {
-		for (ListenersHolder lr : multiListenerHolder.keySet()) {
+		for (ListenersHolder<T> lr : multiListenerHolder.keySet()) {
 			if (lr != null) {
 				lr.removeAllListener();
 			}
 		}
-		for (SingleListenerHolder slr : singleListenerHolder.keySet()) {
+		for (SingleListenerHolder<T> slr : singleListenerHolder.keySet()) {
 			if (slr != null) {
 				slr.setListener(null);
 			}
@@ -43,21 +43,21 @@ public class ListenerRegistration implements InitializingBean, DisposableBean {
 
 	}
 
-	public Map<ListenersHolder, Collection> getMultiListenerHolder() {
+	public Map<ListenersHolder<T>, Collection<T>> getMultiListenerHolder() {
 		return multiListenerHolder;
 	}
 
 	public void setMultiListenerHolder(
-			Map<ListenersHolder, Collection> multiListenerHolder) {
+			Map<ListenersHolder<T>, Collection<T>> multiListenerHolder) {
 		this.multiListenerHolder = multiListenerHolder;
 	}
 
-	public Map<SingleListenerHolder, Object> getSingleListenerHolder() {
+	public Map<SingleListenerHolder<T>, T> getSingleListenerHolder() {
 		return singleListenerHolder;
 	}
 
 	public void setSingleListenerHolder(
-			Map<SingleListenerHolder, Object> singleListenerHolder) {
+			Map<SingleListenerHolder<T>, T> singleListenerHolder) {
 		this.singleListenerHolder = singleListenerHolder;
 	}
 
