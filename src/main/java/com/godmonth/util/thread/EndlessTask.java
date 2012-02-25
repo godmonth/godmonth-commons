@@ -3,7 +3,7 @@ package com.godmonth.util.thread;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class EndlessTask implements Runnable {
+public class EndlessTask implements StoppableTask {
 
 	protected Logger logger = LoggerFactory.getLogger(getClass());
 	private Runnable runnable;
