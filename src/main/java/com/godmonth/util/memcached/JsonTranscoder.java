@@ -1,11 +1,13 @@
 package com.godmonth.util.memcached;
 
 import net.rubyeye.xmemcached.transcoders.CachedData;
+import net.rubyeye.xmemcached.transcoders.CompressionMode;
 import net.rubyeye.xmemcached.transcoders.StringTranscoder;
 import net.rubyeye.xmemcached.transcoders.Transcoder;
 
 import org.apache.commons.lang3.exception.ContextedRuntimeException;
-import org.codehaus.jackson.map.ObjectMapper;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class JsonTranscoder<T> implements Transcoder<T> {
 	private static StringTranscoder stringTranscoder = new StringTranscoder();
@@ -68,6 +70,11 @@ public class JsonTranscoder<T> implements Transcoder<T> {
 
 	public String toString() {
 		return stringTranscoder.toString();
+	}
+
+	@Override
+	public void setCompressionMode(CompressionMode arg0) {
+		//do nothing
 	}
 
 }
