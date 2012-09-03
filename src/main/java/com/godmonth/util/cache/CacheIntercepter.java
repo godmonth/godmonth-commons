@@ -35,10 +35,11 @@ public class CacheIntercepter implements MethodInterceptor {
 
 	@Override
 	public Object invoke(MethodInvocation invocation) throws Throwable {
+
 		for (MethodCacheDefinition methodCacheDefinition : methodCacheDefinitions) {
-			Expression parseExpression = parser.parseExpression(methodCacheDefinition.getCacheKeyExpression());
-			String cacheKey = (String) parseExpression.getValue(invocation.getArguments());
 			if (methodCacheDefinition.getMethodName().equals(invocation.getMethod().getName())) {
+				Expression parseExpression = parser.parseExpression(methodCacheDefinition.getCacheKeyExpression());
+				String cacheKey = (String) parseExpression.getValue(invocation.getArguments());
 				switch (methodCacheDefinition.getCacheBehavior()) {
 				case delete:
 					Object proceed = invocation.proceed();
