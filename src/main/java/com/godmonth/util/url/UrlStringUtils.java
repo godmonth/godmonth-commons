@@ -1,6 +1,8 @@
-package com.godmonth.util.string;
+package com.godmonth.util.url;
 
+import java.net.MalformedURLException;
 import java.net.URI;
+import java.net.URL;
 
 import org.apache.commons.lang3.tuple.Pair;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -19,6 +21,16 @@ public final class UrlStringUtils {
 			ucb = ucb.queryParam(pair.getKey(), pair.getValue());
 		}
 		return ucb.build().encode().toUri();
+	}
+
+	public static String getDomainFromUrl(String urlStr) {
+		try {
+			URL url = new URL(urlStr);
+			return url.getHost();
+		} catch (MalformedURLException e) {
+			return null;
+		}
+
 	}
 
 }
