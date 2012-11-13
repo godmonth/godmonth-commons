@@ -170,6 +170,11 @@
 			<optional>true</optional>
 		</dependency>
 		<dependency>
+			<groupId>com.netflix.curator</groupId>
+			<artifactId>curator-recipes</artifactId>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
 			<groupId>commons-collections</groupId>
 			<artifactId>commons-collections</artifactId>
 			<optional>true</optional>
