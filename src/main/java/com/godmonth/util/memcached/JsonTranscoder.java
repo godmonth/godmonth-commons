@@ -11,12 +11,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class JsonTranscoder<T> implements Transcoder<T> {
 	private static StringTranscoder stringTranscoder = new StringTranscoder();
-	private static ObjectMapper objectMapper = new ObjectMapper();
+	private ObjectMapper objectMapper;
 	private Class<T> clazz;
-
-	public JsonTranscoder(Class<T> clazz) {
-		this.clazz = clazz;
-	}
 
 	@Override
 	public CachedData encode(T o) {
@@ -73,8 +69,12 @@ public class JsonTranscoder<T> implements Transcoder<T> {
 	}
 
 	@Override
-	public void setCompressionMode(CompressionMode arg0) {
-		//do nothing
+	public void setCompressionMode(CompressionMode compressMode) {
+		stringTranscoder.setCompressionMode(compressMode);
+	}
+
+	public void setObjectMapper(ObjectMapper objectMapper) {
+		this.objectMapper = objectMapper;
 	}
 
 }
