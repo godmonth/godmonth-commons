@@ -3,6 +3,7 @@ package com.godmonth.util.jackson;
 import org.springframework.beans.factory.FactoryBean;
 import org.springframework.beans.factory.InitializingBean;
 
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
@@ -25,6 +26,8 @@ public class ObjectMapperFactoryBean implements FactoryBean<ObjectMapper>, Initi
 		}
 		objectMapper.configure(SerializationFeature.INDENT_OUTPUT, prettyPrint);
 		objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+		objectMapper.configure(SerializationFeature.WRITE_NULL_MAP_VALUES, false);
+		objectMapper.setSerializationInclusion(Include.NON_NULL);
 	}
 
 	@Override
