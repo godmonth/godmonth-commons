@@ -3,6 +3,8 @@ package com.godmonth.util;
 import java.nio.ByteBuffer;
 
 public class BigEndianUtils {
+	public static final byte[] EMPTY_BYTE_ARRAY = new byte[0];
+
 	private BigEndianUtils() {
 	}
 
