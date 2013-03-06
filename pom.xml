@@ -25,7 +25,7 @@
 	<scm>
 		<connection>scm:git:git@github.com:godmonth/godmonth-commons.git</connection>
 		<developerConnection>scm:git:git@github.com:godmonth/godmonth-commons.git</developerConnection>
-		<url>http://godmonth@github.com/godmonth/godmonth-commons.git</url>
+		<url>https://github.com/godmonth/godmonth-commons</url>
 	</scm>
 	<build>
 		<plugins>
