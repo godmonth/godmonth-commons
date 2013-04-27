@@ -15,4 +15,12 @@ public class BigEndianUtils {
 	public static int toInt(byte[] bytes) {
 		return ByteBuffer.wrap(bytes).getInt();
 	}
+
+	public static byte[] fromLong(long i) {
+		return ByteBuffer.allocate(8).putLong(i).array();
+	}
+
+	public static long toLong(byte[] bytes) {
+		return ByteBuffer.wrap(bytes).getLong();
+	}
 }
