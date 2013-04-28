@@ -52,4 +52,7 @@ public class CuratorFrameworkFactoryBuilder implements InitializingBean {
 		this.connectionStateListeners = connectionStateListeners;
 	}
 
+	public void setRetryPolicy(RetryPolicy retryPolicy) {
+		this.retryPolicy = retryPolicy;
+	}
 }
