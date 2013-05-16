@@ -2,12 +2,11 @@ package com.godmonth.util.curator.mutex;
 
 import java.util.concurrent.TimeUnit;
 
-import org.springframework.beans.factory.FactoryBean;
-import org.springframework.beans.factory.InitializingBean;
-
 import org.apache.curator.RetryPolicy;
 import org.apache.curator.framework.recipes.atomic.PromotedToLock;
 import org.apache.curator.framework.recipes.atomic.PromotedToLock.Builder;
+import org.springframework.beans.factory.FactoryBean;
+import org.springframework.beans.factory.InitializingBean;
 
 public class PromotedToLockFactoryBean implements FactoryBean<PromotedToLock>, InitializingBean {
 	private String lockPath;

@@ -3,14 +3,13 @@ package com.godmonth.util.curator;
 import java.util.List;
 
 import org.apache.commons.collections.CollectionUtils;
-import org.springframework.beans.factory.InitializingBean;
-
 import org.apache.curator.RetryPolicy;
 import org.apache.curator.framework.CuratorFramework;
 import org.apache.curator.framework.CuratorFrameworkFactory;
 import org.apache.curator.framework.CuratorFrameworkFactory.Builder;
 import org.apache.curator.framework.state.ConnectionStateListener;
 import org.apache.curator.retry.RetryOneTime;
+import org.springframework.beans.factory.InitializingBean;
 
 /**
  * @author shenyue
