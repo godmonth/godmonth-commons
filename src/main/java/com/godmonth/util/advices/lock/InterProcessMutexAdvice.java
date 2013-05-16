@@ -10,7 +10,7 @@ public class InterProcessMutexAdvice {
 
 	private static final Logger logger = LoggerFactory.getLogger(InterProcessMutexAdvice.class);
 
-	public Object cool(ProceedingJoinPoint joinPoint) throws Throwable {
+	public Object lock(ProceedingJoinPoint joinPoint) throws Throwable {
 		try {
 			logger.debug("acquiring lock");
 			interProcessMutex.acquire();
