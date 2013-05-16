@@ -3,9 +3,9 @@ package com.godmonth.util.curator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.netflix.curator.framework.CuratorFramework;
-import com.netflix.curator.framework.state.ConnectionState;
-import com.netflix.curator.framework.state.ConnectionStateListener;
+import org.apache.curator.framework.CuratorFramework;
+import org.apache.curator.framework.state.ConnectionState;
+import org.apache.curator.framework.state.ConnectionStateListener;
 
 /**
  * @author shenyue

@@ -5,12 +5,12 @@ import java.util.List;
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.InitializingBean;
 
-import com.netflix.curator.RetryPolicy;
-import com.netflix.curator.framework.CuratorFramework;
-import com.netflix.curator.framework.CuratorFrameworkFactory;
-import com.netflix.curator.framework.CuratorFrameworkFactory.Builder;
-import com.netflix.curator.framework.state.ConnectionStateListener;
-import com.netflix.curator.retry.RetryOneTime;
+import org.apache.curator.RetryPolicy;
+import org.apache.curator.framework.CuratorFramework;
+import org.apache.curator.framework.CuratorFrameworkFactory;
+import org.apache.curator.framework.CuratorFrameworkFactory.Builder;
+import org.apache.curator.framework.state.ConnectionStateListener;
+import org.apache.curator.retry.RetryOneTime;
 
 /**
  * @author shenyue
@@ -52,4 +52,7 @@ public class CuratorFrameworkFactoryBuilder implements InitializingBean {
 		this.connectionStateListeners = connectionStateListeners;
 	}
 
+	public void setRetryPolicy(RetryPolicy retryPolicy) {
+		this.retryPolicy = retryPolicy;
+	}
 }
