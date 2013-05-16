@@ -2,12 +2,11 @@ package com.godmonth.util.curator.mutex;
 
 import java.util.concurrent.TimeUnit;
 
+import org.apache.curator.RetryPolicy;
+import org.apache.curator.framework.recipes.atomic.PromotedToLock;
+import org.apache.curator.framework.recipes.atomic.PromotedToLock.Builder;
 import org.springframework.beans.factory.FactoryBean;
 import org.springframework.beans.factory.InitializingBean;
-
-import com.netflix.curator.RetryPolicy;
-import com.netflix.curator.framework.recipes.atomic.PromotedToLock;
-import com.netflix.curator.framework.recipes.atomic.PromotedToLock.Builder;
 
 public class PromotedToLockFactoryBean implements FactoryBean<PromotedToLock>, InitializingBean {
 	private String lockPath;

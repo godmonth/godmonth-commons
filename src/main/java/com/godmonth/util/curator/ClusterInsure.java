@@ -11,11 +11,10 @@ import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.exception.ContextedRuntimeException;
 import org.apache.commons.lang3.time.DateUtils;
 import org.apache.commons.lang3.time.FastDateFormat;
+import org.apache.curator.framework.recipes.locks.InterProcessMutex;
+import org.apache.curator.framework.recipes.shared.SharedValue;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import com.netflix.curator.framework.recipes.locks.InterProcessMutex;
-import com.netflix.curator.framework.recipes.shared.SharedValue;
 
 /**
  * @author shenyue
