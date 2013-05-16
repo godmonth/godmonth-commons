@@ -7,6 +7,7 @@ import org.apache.curator.framework.recipes.shared.SharedValue;
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
+import org.springframework.beans.factory.annotation.Required;
 
 public class CuratorDateTimeValue implements Mutable<DateTime> {
 	private SharedValue sharedValue;
@@ -32,6 +33,7 @@ public class CuratorDateTimeValue implements Mutable<DateTime> {
 		return null;
 	}
 
+	@Required
 	public void setSharedValue(SharedValue sharedValue) {
 		this.sharedValue = sharedValue;
 	}
