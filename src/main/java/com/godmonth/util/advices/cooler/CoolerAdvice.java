@@ -16,6 +16,7 @@ public abstract class CoolerAdvice {
 	public Object cooldown(ProceedingJoinPoint joinPoint) throws Throwable {
 		DateTime now = new DateTime();
 		if (checkCool(now)) {
+			logger.debug("pass");
 			lastExecution.setValue(now);
 			return joinPoint.proceed();
 		} else {
