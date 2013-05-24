@@ -1,8 +1,10 @@
 package com.godmonth.util.validations;
 
 import static java.lang.annotation.ElementType.ANNOTATION_TYPE;
+import static java.lang.annotation.ElementType.CONSTRUCTOR;
 import static java.lang.annotation.ElementType.FIELD;
 import static java.lang.annotation.ElementType.METHOD;
+import static java.lang.annotation.ElementType.PARAMETER;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.Retention;
@@ -15,7 +17,7 @@ import javax.validation.Payload;
 /**
  * @author shenyue
  */
-@Target({ METHOD, FIELD, ANNOTATION_TYPE })
+@Target({ METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER })
 @Retention(RetentionPolicy.RUNTIME)
 @Constraint(validatedBy = GbkSizeValidator.class)
 @Documented
