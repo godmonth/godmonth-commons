@@ -2,7 +2,7 @@ package com.godmonth.util;
 
 import org.apache.commons.lang3.ArrayUtils;
 
-public class ArrayAssistance {
+public class ByteArrayHelper {
 	public static void fill(byte[] target, int offset, byte[] source) {
 		if (source != null) {
 			for (int i = 0; i < source.length; i++) {
