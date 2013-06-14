@@ -17,6 +17,7 @@ public class ObjectMapperFactoryBean implements FactoryBean<ObjectMapper>, Initi
 	private boolean camel;
 	private boolean singleton = true;
 	private boolean prettyPrint;
+	private boolean failOnUnkownProperties;
 
 	@Override
 	public void afterPropertiesSet() {
@@ -25,7 +26,7 @@ public class ObjectMapperFactoryBean implements FactoryBean<ObjectMapper>, Initi
 			objectMapper.setPropertyNamingStrategy(PropertyNamingStrategy.CAMEL_CASE_TO_LOWER_CASE_WITH_UNDERSCORES);
 		}
 		objectMapper.configure(SerializationFeature.INDENT_OUTPUT, prettyPrint);
-		objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+		objectMapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, failOnUnkownProperties);
 		objectMapper.configure(SerializationFeature.WRITE_NULL_MAP_VALUES, false);
 		objectMapper.setSerializationInclusion(Include.NON_NULL);
 	}
@@ -51,6 +52,10 @@ public class ObjectMapperFactoryBean implements FactoryBean<ObjectMapper>, Initi
 
 	public void setPrettyPrint(boolean prettyPrint) {
 		this.prettyPrint = prettyPrint;
+	}
+
+	public void setFailOnUnkownProperties(boolean failOnUnkownProperties) {
+		this.failOnUnkownProperties = failOnUnkownProperties;
 	}
 
 }

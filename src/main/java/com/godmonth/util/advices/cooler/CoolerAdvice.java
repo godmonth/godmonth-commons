@@ -1,5 +1,7 @@
 package com.godmonth.util.advices.cooler;
 
+import javax.validation.constraints.NotNull;
+
 import org.apache.commons.lang3.mutable.Mutable;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.joda.time.DateTime;
@@ -13,7 +15,7 @@ public abstract class CoolerAdvice {
 	private static final Logger logger = LoggerFactory.getLogger(CoolerAdvice.class);
 	private Object skipValue;
 
-	public Object cooldown(ProceedingJoinPoint joinPoint) throws Throwable {
+	public Object cooldown(@NotNull ProceedingJoinPoint joinPoint) throws Throwable {
 		DateTime now = new DateTime();
 		if (checkCool(now)) {
 			logger.debug("pass");
@@ -25,7 +27,7 @@ public abstract class CoolerAdvice {
 		}
 	}
 
-	public abstract boolean checkCool(DateTime end);
+	public abstract boolean checkCool(@NotNull DateTime end);
 
 	@Required
 	public void setLastExecution(Mutable<DateTime> lastExecution) {
