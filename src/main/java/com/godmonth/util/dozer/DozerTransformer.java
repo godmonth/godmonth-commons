@@ -5,9 +5,9 @@ import org.dozer.Mapper;
 
 public class DozerTransformer implements Transformer {
 	private Mapper mapper;
-	private Class clazz;
+	private Class<?> clazz;
 
-	public DozerTransformer(Mapper mapper, Class clazz) {
+	public DozerTransformer(Mapper mapper, Class<?> clazz) {
 		this.mapper = mapper;
 		this.clazz = clazz;
 	}
