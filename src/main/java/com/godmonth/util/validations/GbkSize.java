@@ -22,7 +22,7 @@ import javax.validation.Payload;
 @Constraint(validatedBy = GbkSizeValidator.class)
 @Documented
 public @interface GbkSize {
-	String message() default "{com.weihui.pmd.app.moa.constraints.GbkSize.message}";
+	String message() default "{com.godmonth.util.validations.GbkSize.message}";
 
 	Class<?>[] groups() default {};
 
