@@ -11,7 +11,7 @@ import org.apache.commons.io.FilenameUtils;
 
 public class ZipHelper {
 
-	public static void unzip(String zipFile, String workingDir, boolean createSubDir) throws IOException, ZipException {
+	public static String unzip(String zipFile, String workingDir, boolean createSubDir) throws IOException, ZipException {
 		FileUtils.forceMkdir(new File(workingDir));
 		if (createSubDir) {
 			String baseName = FilenameUtils.getBaseName(zipFile);
@@ -20,5 +20,6 @@ public class ZipHelper {
 		}
 		ZipFile zf = new ZipFile(zipFile);
 		zf.extractAll(workingDir);
+		return workingDir;
 	}
 }
