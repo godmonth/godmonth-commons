@@ -40,4 +40,13 @@ public class ZipHelper {
 		zf.addFolder(folder, parameters);
 		return zf;
 	}
+
+	public static ZipFile createZipDeleteFolder(String folder, String file) throws ZipException, IOException {
+		ZipFile create = create(folder, file);
+		if (create != null) {
+			FileUtils.forceDelete(new File(folder));
+		}
+		return create;
+	}
+
 }
