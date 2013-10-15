@@ -32,16 +32,21 @@ public class JacksonObjectFactoryBean<T> implements FactoryBean<T>, Initializing
 		}
 		Validate.notBlank(json, "json is blank");
 		if (singleton) {
-			if (typeReference != null) {
-				object = objectMapper.readValue(json, typeReference);
-			} else {
-				object = objectMapper.readValue(json, objectType);
-			}
+			object = initialValue();
 		}
 	}
 
 	public void setJson(String json) {
 		this.json = json;
+	}
+
+	private T initialValue() throws JsonParseException, JsonMappingException, IOException {
+		if (typeReference != null) {
+			object = objectMapper.readValue(json, typeReference);
+		} else {
+			object = objectMapper.readValue(json, objectType);
+		}
+		return object;
 	}
 
 	public void setObjectMapper(ObjectMapper objectMapper) {
@@ -57,11 +62,7 @@ public class JacksonObjectFactoryBean<T> implements FactoryBean<T>, Initializing
 		if (singleton) {
 			return object;
 		} else {
-			if (typeReference != null) {
-				return objectMapper.readValue(json, typeReference);
-			} else {
-				return objectMapper.readValue(json, objectType);
-			}
+			return initialValue();
 		}
 	}
 
