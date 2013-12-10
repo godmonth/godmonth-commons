@@ -1,4 +1,4 @@
-package com.godmonth.util.advices.lock.hazelcast;
+package com.godmonth.util.advices.lock.lockmap;
 
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
@@ -8,27 +8,28 @@ import org.aspectj.lang.ProceedingJoinPoint;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.hazelcast.core.HazelcastInstance;
+import com.godmonth.util.advices.expression.LockIdFinder;
 
 /**
  * 
  * @author shenyue
  * 
  */
-public abstract class HazelcastMutexAdvice {
+public abstract class LockMapMutexAdvice {
 
-	private static final Logger logger = LoggerFactory.getLogger(HazelcastMutexAdvice.class);
+	private static final Logger logger = LoggerFactory.getLogger(LockMapMutexAdvice.class);
 
 	public static final int DEFAULT_WAIT_SECOND = 5;
 
-	private HazelcastInstance hazelcastInstance;
+	private LockMap lockMap;
+	private LockIdFinder lockIdFinder;
 	private int waitSecond = DEFAULT_WAIT_SECOND;
 
 	public Object lock(ProceedingJoinPoint joinPoint) throws Throwable {
 		Lock lock = null;
 		try {
 			String lockId = getLockId(joinPoint);
-			lock = hazelcastInstance.getLock(lockId);
+			lock = lockMap.getLock(lockId);
 			logger.debug("lock acquiring :{}", lockId);
 			if (lock.tryLock(waitSecond, TimeUnit.SECONDS)) {
 				return joinPoint.proceed();
@@ -46,8 +47,8 @@ public abstract class HazelcastMutexAdvice {
 
 	protected abstract String getLockId(ProceedingJoinPoint joinPoint);
 
-	public void setHazelcastInstance(HazelcastInstance hazelcastInstance) {
-		this.hazelcastInstance = hazelcastInstance;
+	public void setLockMap(LockMap lockMap) {
+		this.lockMap = lockMap;
 	}
 
 	public void setWaitSecond(int waitSecond) {
