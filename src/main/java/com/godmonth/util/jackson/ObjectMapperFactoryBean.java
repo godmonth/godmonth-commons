@@ -2,7 +2,7 @@ package com.godmonth.util.jackson;
 
 import java.util.List;
 
-import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.http.converter.json.Jackson2ObjectMapperFactoryBean;
 
 import com.fasterxml.jackson.annotation.JsonInclude.Include;

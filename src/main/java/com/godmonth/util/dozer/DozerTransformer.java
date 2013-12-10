@@ -1,19 +1,19 @@
 package com.godmonth.util.dozer;
 
-import org.apache.commons.collections.Transformer;
+import org.apache.commons.collections4.Transformer;
 import org.dozer.Mapper;
 
-public class DozerTransformer implements Transformer {
+public class DozerTransformer<OUT> implements Transformer<Object, OUT> {
 	private Mapper mapper;
-	private Class<?> clazz;
+	private Class<OUT> clazz;
 
-	public DozerTransformer(Mapper mapper, Class<?> clazz) {
+	public DozerTransformer(Mapper mapper, Class<OUT> clazz) {
 		this.mapper = mapper;
 		this.clazz = clazz;
 	}
 
 	@Override
-	public Object transform(Object input) {
+	public OUT transform(Object input) {
 		return mapper.map(input, clazz);
 	}
 
