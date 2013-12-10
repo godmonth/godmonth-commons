@@ -1,4 +1,4 @@
-package com.godmonth.util.advices.lock.lockmap;
+package com.godmonth.util.advices.lock.lockmap.expression;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
