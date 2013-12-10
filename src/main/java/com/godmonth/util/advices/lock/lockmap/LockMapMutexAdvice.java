@@ -28,7 +28,7 @@ public abstract class LockMapMutexAdvice {
 	public Object lock(ProceedingJoinPoint joinPoint) throws Throwable {
 		Lock lock = null;
 		try {
-			String lockId = getLockId(joinPoint);
+			String lockId = lockIdFinder.getLockId(joinPoint);
 			lock = lockMap.getLock(lockId);
 			logger.debug("lock acquiring :{}", lockId);
 			if (lock.tryLock(waitSecond, TimeUnit.SECONDS)) {
@@ -45,14 +45,16 @@ public abstract class LockMapMutexAdvice {
 		}
 	}
 
-	protected abstract String getLockId(ProceedingJoinPoint joinPoint);
+	public void setWaitSecond(int waitSecond) {
+		this.waitSecond = waitSecond;
+	}
 
 	public void setLockMap(LockMap lockMap) {
 		this.lockMap = lockMap;
 	}
 
-	public void setWaitSecond(int waitSecond) {
-		this.waitSecond = waitSecond;
+	public void setLockIdFinder(LockIdFinder lockIdFinder) {
+		this.lockIdFinder = lockIdFinder;
 	}
 
 }
