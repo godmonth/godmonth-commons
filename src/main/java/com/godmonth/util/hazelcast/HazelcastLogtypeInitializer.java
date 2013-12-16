@@ -1,4 +1,4 @@
-package com.godmonth.util.advices.lock.hazelcast;
+package com.godmonth.util.hazelcast;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;

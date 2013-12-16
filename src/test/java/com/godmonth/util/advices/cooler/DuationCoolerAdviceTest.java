@@ -8,6 +8,8 @@ import org.joda.time.Duration;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import com.godmonth.util.cooler.DuationCoolerAdvice;
+
 public class DuationCoolerAdviceTest {
 
 	@Test

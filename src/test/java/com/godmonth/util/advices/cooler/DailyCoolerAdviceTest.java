@@ -7,6 +7,8 @@ import org.joda.time.DateTime;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import com.godmonth.util.cooler.DailyCoolerAdvice;
+
 public class DailyCoolerAdviceTest {
 	@Test
 	public void f() throws Throwable {

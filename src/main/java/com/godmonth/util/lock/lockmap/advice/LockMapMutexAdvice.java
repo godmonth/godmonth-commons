@@ -1,4 +1,4 @@
-package com.godmonth.util.advices.lock.lockmap;
+package com.godmonth.util.lock.lockmap.advice;
 
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
@@ -7,6 +7,9 @@ import java.util.concurrent.locks.Lock;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import com.godmonth.util.lock.lockmap.LockIdFinder;
+import com.godmonth.util.lock.lockmap.LockMap;
 
 /**
  * 

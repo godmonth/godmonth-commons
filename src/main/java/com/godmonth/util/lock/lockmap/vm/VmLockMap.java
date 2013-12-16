@@ -1,9 +1,9 @@
-package com.godmonth.util.advices.lock.lockmap.vm;
+package com.godmonth.util.lock.lockmap.vm;
 
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-import com.godmonth.util.advices.lock.lockmap.LockMap;
+import com.godmonth.util.lock.lockmap.LockMap;
 
 public class VmLockMap implements LockMap {
 	@Override

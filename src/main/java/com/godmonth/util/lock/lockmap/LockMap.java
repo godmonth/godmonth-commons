@@ -1,4 +1,4 @@
-package com.godmonth.util.advices.lock.lockmap;
+package com.godmonth.util.lock.lockmap;
 
 import java.util.concurrent.locks.Lock;
 

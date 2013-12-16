@@ -1,8 +1,8 @@
-package com.godmonth.util.advices.lock.hazelcast;
+package com.godmonth.util.hazelcast;
 
 import java.util.concurrent.locks.Lock;
 
-import com.godmonth.util.advices.lock.lockmap.LockMap;
+import com.godmonth.util.lock.lockmap.LockMap;
 import com.hazelcast.core.HazelcastInstance;
 
 public class HazelcastLockMap implements LockMap {

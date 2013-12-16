@@ -1,4 +1,4 @@
-package com.godmonth.util.advices.cooler;
+package com.godmonth.util.cooler;
 
 import org.apache.commons.lang3.mutable.Mutable;
 import org.joda.time.DateTime;

@@ -1,4 +1,4 @@
-package com.godmonth.util.advices.lock;
+package com.godmonth.util.lock.advices;
 
 import org.apache.curator.framework.recipes.locks.InterProcessMutex;
 import org.aspectj.lang.ProceedingJoinPoint;

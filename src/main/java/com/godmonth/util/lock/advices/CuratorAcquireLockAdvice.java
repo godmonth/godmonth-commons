@@ -1,4 +1,4 @@
-package com.godmonth.util.advices.lock;
+package com.godmonth.util.lock.advices;
 
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;

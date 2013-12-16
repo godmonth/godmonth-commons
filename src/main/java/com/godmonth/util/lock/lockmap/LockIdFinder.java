@@ -1,4 +1,4 @@
-package com.godmonth.util.advices.lock.lockmap;
+package com.godmonth.util.lock.lockmap;
 
 import org.aspectj.lang.ProceedingJoinPoint;
 

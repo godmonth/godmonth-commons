@@ -1,4 +1,4 @@
-package com.godmonth.util.advices.lock.lockmap.expression;
+package com.godmonth.util.lock.lockmap.expression;
 
 import java.lang.reflect.Method;
 
@@ -9,7 +9,7 @@ import org.springframework.expression.Expression;
 import org.springframework.expression.ExpressionParser;
 import org.springframework.expression.spel.standard.SpelExpressionParser;
 
-import com.godmonth.util.advices.lock.lockmap.LockIdFinder;
+import com.godmonth.util.lock.lockmap.LockIdFinder;
 
 public class ExpressionLockIdFinder implements LockIdFinder {
 	private ExpressionParser parser = new SpelExpressionParser();

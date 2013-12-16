@@ -1,4 +1,4 @@
-package com.godmonth.util.advices.cooler;
+package com.godmonth.util.cooler;
 
 import org.joda.time.DateTime;
 import org.joda.time.Duration;
