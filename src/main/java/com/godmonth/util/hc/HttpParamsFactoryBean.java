@@ -8,8 +8,11 @@ import org.springframework.beans.factory.FactoryBean;
 import org.springframework.beans.factory.InitializingBean;
 
 /**
+ * @deprecated in favor of httpcore 4.3 use builder instead.
+ * 
  * @author shenyue
  */
+@Deprecated
 public class HttpParamsFactoryBean implements FactoryBean<HttpParams>, InitializingBean {
 	private Map<String, Object> params;
 	private HttpParams httpParams;
