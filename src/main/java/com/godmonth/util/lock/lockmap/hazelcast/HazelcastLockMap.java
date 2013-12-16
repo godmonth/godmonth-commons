@@ -1,4 +1,4 @@
-package com.godmonth.util.hazelcast;
+package com.godmonth.util.lock.lockmap.hazelcast;
 
 import java.util.concurrent.locks.Lock;
 
