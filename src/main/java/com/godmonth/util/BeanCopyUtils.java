@@ -4,12 +4,10 @@ import org.apache.commons.beanutils.PropertyUtils;
 import org.apache.commons.lang3.exception.ContextedRuntimeException;
 
 /**
- * @deprecated use dozer instead
  * 
  * @author shenyue
  * 
  */
-@Deprecated
 public class BeanCopyUtils {
 	private BeanCopyUtils() {
 	}
