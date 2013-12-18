@@ -165,7 +165,7 @@
 			<dependency>
 				<groupId>com.godmonth</groupId>
 				<artifactId>deps</artifactId>
-				<version>2.0.2</version>
+				<version>2.0.3-SNAPSHOT</version>
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
@@ -231,7 +231,7 @@
 		</dependency>
 		<dependency>
 			<groupId>org.apache.wicket</groupId>
-			<artifactId>wicket-spring</artifactId>
+			<artifactId>wicket-core</artifactId>
 			<optional>true</optional>
 		</dependency>
 		<dependency>
@@ -271,11 +271,6 @@
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>servlet-api</artifactId>
-			<optional>true</optional>
-		</dependency>
-		<dependency>
-			<groupId>commons-beanutils</groupId>
-			<artifactId>commons-beanutils</artifactId>
 			<optional>true</optional>
 		</dependency>
 		<dependency>
