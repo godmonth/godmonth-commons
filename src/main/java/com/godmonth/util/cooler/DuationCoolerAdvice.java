@@ -15,8 +15,11 @@ public class DuationCoolerAdvice extends CoolerAdvice {
 	@Override
 	public boolean checkCool(DateTime end) {
 		DateTime lastDate = lastExecution.getValue();
-		logger.trace("lastExecution:{}", lastExecution);
-		return lastDate == null || new Duration(lastDate, end).compareTo(leastDuation) > 0;
+		boolean passed = lastDate == null || new Duration(lastDate, end).compareTo(leastDuation) > 0;
+		logger.trace("lastExecution:{},lastDate:{},leastDuation:{},passed:{}", lastExecution, lastDate, leastDuation,
+				passed);
+		return passed;
+
 	}
 
 	@Required
