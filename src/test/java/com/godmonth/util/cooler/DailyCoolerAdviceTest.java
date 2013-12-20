@@ -11,7 +11,7 @@ import com.godmonth.util.cooler.DailyCoolerAdvice;
 
 public class DailyCoolerAdviceTest {
 	@Test
-	public void f() throws Throwable {
+	public void testCooldown() throws Throwable {
 		DailyCoolerAdvice dca = new DailyCoolerAdvice();
 		MutableObject<DateTime> mutableObject = new MutableObject<DateTime>();
 		dca.setLastExecution(mutableObject);
