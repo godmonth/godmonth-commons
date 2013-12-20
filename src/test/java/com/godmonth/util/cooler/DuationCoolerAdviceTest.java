@@ -1,9 +1,6 @@
 package com.godmonth.util.cooler;
 
-import java.util.Date;
-
 import org.apache.commons.lang3.mutable.MutableObject;
-import org.apache.commons.lang3.time.DateUtils;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.easymock.EasyMock;
 import org.joda.time.DateTime;
@@ -33,16 +30,4 @@ public class DuationCoolerAdviceTest {
 		EasyMock.verify(pjp);
 	}
 
-	public static void main(String[] args) {
-		Duration standardMinutes = Duration.standardMinutes(10);
-		Date d = new Date();
-		Date d2 = DateUtils.addMinutes(d, 10);
-//		d2 = DateUtils.addSeconds(d2, 1);
-		Duration duration = new Duration(d.getTime(), d2.getTime());
-		System.out.println(duration);
-		System.out.println(standardMinutes);
-		int compareTo = duration.compareTo(standardMinutes);
-
-		System.out.println(compareTo);
-	}
 }
