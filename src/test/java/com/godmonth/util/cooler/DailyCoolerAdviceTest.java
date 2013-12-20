@@ -1,24 +1,22 @@
-package com.godmonth.util.advices.cooler;
+package com.godmonth.util.cooler;
 
 import org.apache.commons.lang3.mutable.MutableObject;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.easymock.EasyMock;
 import org.joda.time.DateTime;
-import org.joda.time.Duration;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import com.godmonth.util.cooler.DuationCoolerAdvice;
+import com.godmonth.util.cooler.DailyCoolerAdvice;
 
-public class DuationCoolerAdviceTest {
-
+public class DailyCoolerAdviceTest {
 	@Test
 	public void f() throws Throwable {
-		DuationCoolerAdvice dca = new DuationCoolerAdvice();
+		DailyCoolerAdvice dca = new DailyCoolerAdvice();
 		MutableObject<DateTime> mutableObject = new MutableObject<DateTime>();
 		dca.setLastExecution(mutableObject);
 		dca.setSkipValue("abc");
-		dca.setLeastDuation(Duration.standardHours(1));
+
 		ProceedingJoinPoint pjp = EasyMock.createMock(ProceedingJoinPoint.class);
 		EasyMock.expect(pjp.proceed()).andReturn("aaa");
 		EasyMock.replay(pjp);
@@ -31,5 +29,4 @@ public class DuationCoolerAdviceTest {
 
 		EasyMock.verify(pjp);
 	}
-
 }

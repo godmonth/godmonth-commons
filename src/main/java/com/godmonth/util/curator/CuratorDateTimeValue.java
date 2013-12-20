@@ -28,7 +28,11 @@ public class CuratorDateTimeValue implements Mutable<DateTime> {
 	public DateTime getValue() {
 		byte[] value = sharedValue.getValue();
 		if (ArrayUtils.isNotEmpty(value)) {
-			return dateTimeFormatter.parseDateTime(new String(value));
+			try {
+				return dateTimeFormatter.parseDateTime(new String(value));
+			} catch (Exception e) {
+				return null;
+			}
 		}
 		return null;
 	}
