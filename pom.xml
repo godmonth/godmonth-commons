@@ -136,7 +136,6 @@
 					<charset>utf-8</charset>
 					<links>
 						<link>http://commons.apache.org/proper/commons-lang/javadocs/api-release</link>
-						<link>http://wiki.weihui.com/finance_site/trade-api/apidocs</link>
 					</links>
 					<javaApiLinks>
 						<property>

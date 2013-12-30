@@ -9,12 +9,6 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 public class MethodCacheDefinition {
 	private String methodName;
 
-	public static enum CacheBehavior {
-		putWhenNull, delete;
-	}
-
-	private CacheBehavior cacheBehavior;
-
 	private String cacheKeyExpression;
 
 	public String getMethodName() {
@@ -23,14 +17,6 @@ public class MethodCacheDefinition {
 
 	public void setMethodName(String methodName) {
 		this.methodName = methodName;
-	}
-
-	public CacheBehavior getCacheBehavior() {
-		return cacheBehavior;
-	}
-
-	public void setCacheBehavior(CacheBehavior cacheBehavior) {
-		this.cacheBehavior = cacheBehavior;
 	}
 
 	public String getCacheKeyExpression() {
@@ -45,9 +31,8 @@ public class MethodCacheDefinition {
 	 * @see java.lang.Object#toString()
 	 */
 	public String toString() {
-		return new ToStringBuilder(this, ToStringStyle.MULTI_LINE_STYLE)
-				.append("cacheKeyExpression", this.cacheKeyExpression).append("methodName", this.methodName)
-				.append("cacheBehavior", this.cacheBehavior).toString();
+		return new ToStringBuilder(this, ToStringStyle.MULTI_LINE_STYLE).append("methodName", this.methodName)
+				.append("cacheKeyExpression", this.cacheKeyExpression).toString();
 	}
 
 }
