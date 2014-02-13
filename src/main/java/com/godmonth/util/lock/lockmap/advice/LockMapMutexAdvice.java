@@ -28,21 +28,21 @@ public class LockMapMutexAdvice {
 
 	public Object lock(ProceedingJoinPoint joinPoint) throws Throwable {
 		Lock lock = null;
+		String lockId = null;
 		try {
-			String lockId = lockIdFinder.getLockId(joinPoint);
+			lockId = lockIdFinder.getLockId(joinPoint);
 			lock = lockMap.getLock(lockId);
 			logger.debug("lock acquiring :{}", lockId);
 			if (lock.tryLock(waitSecond, TimeUnit.SECONDS)) {
+				logger.debug("lock acquiried :{}", lockId);
 				return joinPoint.proceed();
 			}
-			logger.debug("lock acquiried :{}", lockId);
 			throw new TimeoutException("wait timeout exceeded");
 		} finally {
 			if (lock != null) {
-				logger.debug("lock released");
+				logger.debug("lock released :{}", lockId);
 				lock.unlock();
 			}
-
 		}
 	}
 
