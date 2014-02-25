@@ -35,14 +35,14 @@ public class CacheIntercepter implements MethodInterceptor {
 				String cacheKey = (String) parseExpression.getValue(invocation.getArguments());
 				ValueWrapper valueWrapper = cache.get(cacheKey);
 				if (valueWrapper != null) {
-					logger.trace("key found: {}", cacheKey);
+					logger.trace("cache {}, hit: {}", cache.getName(), cacheKey);
 					return valueWrapper.get();
 				} else {
-					logger.trace("key notfound: {}", cacheKey);
+					logger.trace("cache {}, miss: {}", cache.getName(), cacheKey);
 					Object proceed = invocation.proceed();
 					if (proceed != null) {
 						cache.put(cacheKey, proceed);
-						logger.trace("key put: {}", cacheKey);
+						logger.trace("cache {}, put: {}", cache.getName(), cacheKey);
 					}
 					return proceed;
 				}
