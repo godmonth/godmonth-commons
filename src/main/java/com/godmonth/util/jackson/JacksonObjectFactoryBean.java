@@ -6,6 +6,7 @@ import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.Validate;
 import org.springframework.beans.factory.FactoryBean;
 import org.springframework.beans.factory.InitializingBean;
+import org.springframework.beans.factory.annotation.Required;
 import org.springframework.core.io.Resource;
 
 import com.fasterxml.jackson.core.JsonParseException;
@@ -49,14 +50,6 @@ public class JacksonObjectFactoryBean<T> implements FactoryBean<T>, Initializing
 		return object;
 	}
 
-	public void setObjectMapper(ObjectMapper objectMapper) {
-		this.objectMapper = objectMapper;
-	}
-
-	public void setObjectType(Class<T> objectType) {
-		this.objectType = objectType;
-	}
-
 	@Override
 	public T getObject() throws Exception {
 		if (singleton) {
@@ -76,6 +69,17 @@ public class JacksonObjectFactoryBean<T> implements FactoryBean<T>, Initializing
 		return true;
 	}
 
+	@Required
+	public void setObjectMapper(ObjectMapper objectMapper) {
+		this.objectMapper = objectMapper;
+	}
+
+	@Required
+	public void setObjectType(Class<T> objectType) {
+		this.objectType = objectType;
+	}
+
+	@Required
 	public void setJsonResource(Resource jsonResource) {
 		this.jsonResource = jsonResource;
 	}

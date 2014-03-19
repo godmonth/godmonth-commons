@@ -164,7 +164,7 @@
 			<dependency>
 				<groupId>com.godmonth</groupId>
 				<artifactId>deps</artifactId>
-				<version>2.1.5</version>
+				<version>2.2-SNAPSHOT</version>
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
