@@ -31,13 +31,16 @@ public class LockMapMutexAdvice {
 		String lockId = null;
 		try {
 			lockId = lockIdFinder.getLockId(joinPoint);
-			lock = lockMap.getLock(lockId);
-			logger.debug("lock acquiring :{}", lockId);
-			if (lock.tryLock(waitSecond, TimeUnit.SECONDS)) {
-				logger.debug("lock acquiried :{}", lockId);
-				return joinPoint.proceed();
+			if (lockId != null) {
+				lock = lockMap.getLock(lockId);
+				logger.debug("lock acquiring :{}", lockId);
+				if (lock.tryLock(waitSecond, TimeUnit.SECONDS)) {
+					logger.debug("lock acquiried :{}", lockId);
+					return joinPoint.proceed();
+				}
+				throw new TimeoutException("wait timeout exceeded");
 			}
-			throw new TimeoutException("wait timeout exceeded");
+			return joinPoint.proceed();
 		} finally {
 			if (lock != null) {
 				logger.debug("lock released :{}", lockId);
