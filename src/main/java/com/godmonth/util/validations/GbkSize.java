@@ -15,6 +15,8 @@ import javax.validation.Constraint;
 import javax.validation.Payload;
 
 /**
+ * gbk字符的字节长度
+ * 
  * @author shenyue
  */
 @Target({ METHOD, FIELD, ANNOTATION_TYPE, CONSTRUCTOR, PARAMETER })

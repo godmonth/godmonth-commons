@@ -8,6 +8,8 @@ import javax.validation.ConstraintValidatorContext;
 import org.apache.commons.io.Charsets;
 
 /**
+ * gbk字符长度校验
+ * 
  * @author shenyue
  */
 public class GbkSizeValidator implements ConstraintValidator<GbkSize, String> {
