@@ -75,13 +75,12 @@ public class JacksonObjectFactoryBean<T> implements FactoryBean<T>, Initializing
 	}
 
 	@Required
-	public void setObjectType(Class<T> objectType) {
-		this.objectType = objectType;
-	}
-
-	@Required
 	public void setJsonResource(Resource jsonResource) {
 		this.jsonResource = jsonResource;
+	}
+
+	public void setObjectType(Class<T> objectType) {
+		this.objectType = objectType;
 	}
 
 	public void setTypeReference(TypeReference<?> typeReference) {
