@@ -18,7 +18,7 @@ public class ExpressionLockIdFinder implements LockIdFinder {
 		MethodSignature signature = (MethodSignature) joinPoint.getSignature();
 		Method method = signature.getMethod();
 		LockId annotation = method.getAnnotation(LockId.class);
-		Validate.notNull(annotation, "annotation not found");
+		Validate.notNull(annotation, "annotation LockId not found");
 		String expression = annotation.expression();
 		Expression exp = parser.parseExpression(expression);
 		String lockId = (String) exp.getValue(joinPoint.getArgs());
