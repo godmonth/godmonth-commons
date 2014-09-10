@@ -4,6 +4,8 @@ import java.io.IOException;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.Validate;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.FactoryBean;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Required;
@@ -18,6 +20,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  * @author shenyue
  */
 public class JacksonObjectFactoryBean<T> implements FactoryBean<T>, InitializingBean {
+
+	private static final Logger logger = LoggerFactory.getLogger(JacksonObjectFactoryBean.class);
 	private String json;
 	private Resource jsonResource;
 	private ObjectMapper objectMapper;
@@ -32,6 +36,7 @@ public class JacksonObjectFactoryBean<T> implements FactoryBean<T>, Initializing
 			json = IOUtils.toString(jsonResource.getInputStream(), "utf-8");
 		}
 		Validate.notBlank(json, "json is blank");
+		logger.debug("jsonResource:{},content:{}", jsonResource.getDescription(), json);
 		if (singleton) {
 			object = initialValue();
 		}
