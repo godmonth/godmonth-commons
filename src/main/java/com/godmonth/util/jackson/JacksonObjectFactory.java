@@ -1,6 +1,8 @@
 package com.godmonth.util.jackson;
 
 import org.apache.commons.lang3.exception.ContextedRuntimeException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.core.io.Resource;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -9,6 +11,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  * @author shenyue
  */
 public class JacksonObjectFactory<T> {
+
+	private static final Logger logger = LoggerFactory.getLogger(JacksonObjectFactory.class);
 	private Resource resource;
 	private ObjectMapper objectMapper;
 	private Class<T> objectType;

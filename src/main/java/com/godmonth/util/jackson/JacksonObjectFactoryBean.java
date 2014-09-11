@@ -36,7 +36,7 @@ public class JacksonObjectFactoryBean<T> implements FactoryBean<T>, Initializing
 			json = IOUtils.toString(jsonResource.getInputStream(), "utf-8");
 		}
 		Validate.notBlank(json, "json is blank");
-		logger.debug("jsonResource:{},content:{}", jsonResource.getDescription(), json);
+		logger.trace("jsonResource:{},content:{}", jsonResource.getDescription(), json);
 		if (singleton) {
 			object = initialValue();
 		}
