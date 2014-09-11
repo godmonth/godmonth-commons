@@ -8,7 +8,7 @@
 	</parent>
 	<groupId>com.godmonth</groupId>
 	<artifactId>godmonth-commons</artifactId>
-	<version>0.7.5-SNAPSHOT</version>
+	<version>0.8-SNAPSHOT</version>
 	<developers>
 		<developer>
 			<email>link2people@gmail.com</email>
