@@ -2,11 +2,13 @@ package com.godmonth.util.lock.lockmap.hazelcast;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
+
 /**
  * 
  * @author shenyue
  *
  */
+@Deprecated
 public class HazelcastLogtypeInitializer implements ServletContextListener {
 
 	@Override
