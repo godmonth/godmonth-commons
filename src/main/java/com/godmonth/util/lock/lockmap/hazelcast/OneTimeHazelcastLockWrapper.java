@@ -13,8 +13,7 @@ import com.hazelcast.spi.exception.DistributedObjectDestroyedException;
 
 public class OneTimeHazelcastLockWrapper implements Lock {
 
-	private static final Logger logger = LoggerFactory
-			.getLogger(OneTimeHazelcastLockWrapper.class);
+	private static final Logger logger = LoggerFactory.getLogger(OneTimeHazelcastLockWrapper.class);
 	public static final int DEFAULT_MAX_RECURSIVE = 5;
 	private final ILock lock;
 	private final String lockId;
@@ -24,8 +23,7 @@ public class OneTimeHazelcastLockWrapper implements Lock {
 		this(lock, lockId, DEFAULT_MAX_RECURSIVE);
 	}
 
-	public OneTimeHazelcastLockWrapper(ILock lock, String lockId,
-			int maxRecursive) {
+	public OneTimeHazelcastLockWrapper(ILock lock, String lockId, int maxRecursive) {
 		Validate.notNull(lock);
 		Validate.isTrue(maxRecursive > 0);
 		this.lock = lock;
@@ -35,23 +33,22 @@ public class OneTimeHazelcastLockWrapper implements Lock {
 
 	@Override
 	public void lock() {
+		if (lock.isLockedByCurrentThread()) {
+			throw new IllegalStateException("reentrant prohibited");
+		}
 		recursiveLock(0);
 	}
 
 	private void recursiveLock(int currentRecursive) {
 		if (currentRecursive >= maxRecursive) {
-			throw new IllegalStateException("lockId: " + lockId
-					+ ", maxRecursive reached" + maxRecursive);
+			throw new IllegalStateException("lockId: " + lockId + ", maxRecursive reached" + maxRecursive);
 		}
 		try {
-			logger.trace("lock acquiring :{}, currentRecursive:{}", lockId,
-					currentRecursive);
+			logger.trace("lock acquiring :{}, currentRecursive:{}", lockId, currentRecursive);
 			lock.lock();
-			logger.trace("lock acquiried :{}, currentRecursive:{}", lockId,
-					currentRecursive);
+			logger.trace("lock acquiried :{}, currentRecursive:{}", lockId, currentRecursive);
 		} catch (DistributedObjectDestroyedException e) {
-			logger.trace("lock destoried by others :{}, currentRecursive:{}",
-					lockId, currentRecursive);
+			logger.trace("lock destoried by others :{}, currentRecursive:{}", lockId, currentRecursive);
 			if (currentRecursive + 1 >= maxRecursive) {
 				throw e;
 			} else {
@@ -63,6 +60,9 @@ public class OneTimeHazelcastLockWrapper implements Lock {
 
 	@Override
 	public boolean tryLock() {
+		if (lock.isLockedByCurrentThread()) {
+			throw new IllegalStateException("reentrant prohibited");
+		}
 		logger.trace("try lock acquiring :{}", lockId);
 		boolean tryLock = lock.tryLock();
 		if (tryLock) {
@@ -74,33 +74,29 @@ public class OneTimeHazelcastLockWrapper implements Lock {
 	}
 
 	@Override
-	public boolean tryLock(long time, TimeUnit unit)
-			throws InterruptedException {
+	public boolean tryLock(long time, TimeUnit unit) throws InterruptedException {
+		if (lock.isLockedByCurrentThread()) {
+			throw new IllegalStateException("reentrant prohibited");
+		}
 		return recursiveTryLock(time, unit, 0);
 	}
 
-	private boolean recursiveTryLock(long time, TimeUnit unit,
-			int currentRecursive) throws InterruptedException {
+	private boolean recursiveTryLock(long time, TimeUnit unit, int currentRecursive) throws InterruptedException {
 		if (currentRecursive >= maxRecursive) {
-			throw new IllegalStateException("lockId: " + lockId
-					+ ", maxRecursive reached" + maxRecursive);
+			throw new IllegalStateException("lockId: " + lockId + ", maxRecursive reached" + maxRecursive);
 		}
 		boolean result = false;
 		try {
-			logger.trace("try lock acquiring :{}, currentRecursive:{}", lockId,
-					currentRecursive);
+			logger.trace("try lock acquiring :{}, currentRecursive:{}", lockId, currentRecursive);
 			result = lock.tryLock(time, unit);
 			if (result) {
-				logger.trace("try lock acquired :{}, currentRecursive:{}",
-						lockId, currentRecursive);
+				logger.trace("try lock acquired :{}, currentRecursive:{}", lockId, currentRecursive);
 			} else {
-				logger.trace("try lock failure :{}, currentRecursive:{}",
-						lockId, currentRecursive);
+				logger.trace("try lock failure :{}, currentRecursive:{}", lockId, currentRecursive);
 			}
 			return result;
 		} catch (DistributedObjectDestroyedException e) {
-			logger.trace("lock destroied by others :{}, currentRecursive:{}",
-					lockId, currentRecursive);
+			logger.trace("lock destroied by others :{}, currentRecursive:{}", lockId, currentRecursive);
 			if (currentRecursive + 1 >= maxRecursive) {
 				throw e;
 			} else {
@@ -117,7 +113,7 @@ public class OneTimeHazelcastLockWrapper implements Lock {
 			lock.destroy();
 			logger.trace("lock destoried :{}", lockId);
 		} else {
-			logger.trace("lock owner is changed :{}", lockId);
+			logger.trace("lock is not locked by current thread :{}", lockId);
 		}
 	}
 
