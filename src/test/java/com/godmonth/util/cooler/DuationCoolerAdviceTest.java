@@ -30,5 +30,19 @@ public class DuationCoolerAdviceTest {
 		EasyMock.verify(pjp);
 	}
 
-	
+	@Test
+	public void testCooldown2() throws Throwable {
+		DuationCoolerAdvice dca = new DuationCoolerAdvice();
+		MutableObject<DateTime> mutableObject = new MutableObject<DateTime>();
+		dca.setLastExecution(mutableObject);
+		dca.setLeastDuation(Duration.standardHours(1));
+		Assert.assertTrue(dca.checkCool(new DateTime()));
+
+		mutableObject.setValue(new DateTime());
+		Assert.assertFalse(dca.checkCool(new DateTime()));
+
+		mutableObject.setValue(new DateTime().minusHours(2));
+		Assert.assertTrue(dca.checkCool(new DateTime()));
+
+	}
 }
