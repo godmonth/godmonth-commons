@@ -30,4 +30,5 @@ public class DuationCoolerAdviceTest {
 		EasyMock.verify(pjp);
 	}
 
+	
 }
