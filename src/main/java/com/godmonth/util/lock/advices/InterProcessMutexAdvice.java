@@ -12,10 +12,12 @@ public class InterProcessMutexAdvice {
 
 	public Object lock(ProceedingJoinPoint joinPoint) throws Throwable {
 		try {
-			logger.debug("acquiring lock");
+			logger.trace("lock acquiring");
 			interProcessMutex.acquire();
+			logger.trace("lock acquiried");
 			return joinPoint.proceed();
 		} finally {
+			logger.debug("acquire releasing");
 			interProcessMutex.release();
 			logger.debug("acquire released");
 		}
