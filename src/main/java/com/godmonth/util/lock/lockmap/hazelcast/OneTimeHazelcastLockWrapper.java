@@ -15,27 +15,30 @@ public class OneTimeHazelcastLockWrapper implements Lock {
 
 	private static final Logger logger = LoggerFactory.getLogger(OneTimeHazelcastLockWrapper.class);
 	public static final int DEFAULT_MAX_RECURSIVE = 5;
+	public static final int DEFAULT_LOCK_TIMEOUT_MINUTES = 120;
 	private final ILock lock;
 	private final String lockId;
-	private final int maxRecursive;
+	private int maxRecursive;
+
+	private int lockTimeOutMinutes;
 
 	public OneTimeHazelcastLockWrapper(ILock lock, String lockId) {
-		this(lock, lockId, DEFAULT_MAX_RECURSIVE);
+		this(lock, lockId, DEFAULT_MAX_RECURSIVE, DEFAULT_LOCK_TIMEOUT_MINUTES);
 	}
 
-	public OneTimeHazelcastLockWrapper(ILock lock, String lockId, int maxRecursive) {
+	public OneTimeHazelcastLockWrapper(ILock lock, String lockId, int maxRecursive, int lockTimeOutMinutes) {
 		Validate.notNull(lock);
 		Validate.isTrue(maxRecursive > 0);
+		Validate.isTrue(lockTimeOutMinutes > 0);
+
 		this.lock = lock;
 		this.lockId = lockId;
 		this.maxRecursive = maxRecursive;
+		this.lockTimeOutMinutes = lockTimeOutMinutes;
 	}
 
 	@Override
 	public void lock() {
-		if (lock.isLockedByCurrentThread()) {
-			throw new IllegalStateException("reentrant prohibited");
-		}
 		recursiveLock(0);
 	}
 
@@ -45,7 +48,7 @@ public class OneTimeHazelcastLockWrapper implements Lock {
 		}
 		try {
 			logger.trace("lock acquiring :{}, currentRecursive:{}", lockId, currentRecursive);
-			lock.lock();
+			lock.lock(lockTimeOutMinutes, TimeUnit.MINUTES);
 			logger.trace("lock acquiried :{}, currentRecursive:{}", lockId, currentRecursive);
 		} catch (DistributedObjectDestroyedException e) {
 			logger.trace("lock destoried by others :{}, currentRecursive:{}", lockId, currentRecursive);
@@ -60,9 +63,6 @@ public class OneTimeHazelcastLockWrapper implements Lock {
 
 	@Override
 	public boolean tryLock() {
-		if (lock.isLockedByCurrentThread()) {
-			throw new IllegalStateException("reentrant prohibited");
-		}
 		logger.trace("try lock acquiring :{}", lockId);
 		boolean tryLock = lock.tryLock();
 		if (tryLock) {
@@ -75,9 +75,6 @@ public class OneTimeHazelcastLockWrapper implements Lock {
 
 	@Override
 	public boolean tryLock(long time, TimeUnit unit) throws InterruptedException {
-		if (lock.isLockedByCurrentThread()) {
-			throw new IllegalStateException("reentrant prohibited");
-		}
 		return recursiveTryLock(time, unit, 0);
 	}
 
@@ -109,9 +106,15 @@ public class OneTimeHazelcastLockWrapper implements Lock {
 	@Override
 	public void unlock() {
 		if (lock.isLockedByCurrentThread()) {
-			logger.trace("lock destorying :{}", lockId);
-			lock.destroy();
-			logger.trace("lock destoried :{}", lockId);
+			if (lock.getLockCount() > 1) {
+				logger.trace("lock unlocking :{}", lockId);
+				lock.unlock();
+				logger.trace("lock unlocked :{}", lockId);
+			} else {
+				logger.trace("lock destorying :{}", lockId);
+				lock.destroy();
+				logger.trace("lock destoried :{}", lockId);
+			}
 		} else {
 			logger.trace("lock is not locked by current thread :{}", lockId);
 		}
