@@ -39,12 +39,14 @@ public class CacheIntercepter implements MethodInterceptor {
 					return valueWrapper.get();
 				} else {
 					logger.trace("cache {}, miss: {}", cache.getName(), cacheKey);
-					Object proceed = invocation.proceed();
-					if (proceed != null) {
-						cache.put(cacheKey, proceed);
+					Object result = invocation.proceed();
+					if (result != null) {
+						cache.put(cacheKey, result);
 						logger.trace("cache {}, put: {}", cache.getName(), cacheKey);
+					} else {
+						logger.trace("cache {}, result null, skipped: {}", cache.getName(), cacheKey);
 					}
-					return proceed;
+					return result;
 				}
 			}
 		}
