@@ -6,7 +6,7 @@ import org.dozer.Mapper;
 
 import com.google.common.base.Function;
 
-public class DozerTransformer<OUT> implements Transformer<Object, OUT>, Function<Object, OUT> {
+public class DozerTransformer<IN, OUT> implements Transformer<IN, OUT>, Function<IN, OUT> {
 	private Mapper mapper;
 	private Class<OUT> clazz;
 	private final String mapId;
@@ -21,7 +21,7 @@ public class DozerTransformer<OUT> implements Transformer<Object, OUT>, Function
 		this.mapId = mapId;
 	}
 
-	public OUT transform(Object input) {
+	public OUT transform(IN input) {
 		if (StringUtils.isNotBlank(mapId)) {
 			return mapper.map(input, clazz, mapId);
 		} else {
@@ -30,7 +30,7 @@ public class DozerTransformer<OUT> implements Transformer<Object, OUT>, Function
 	}
 
 	@Override
-	public OUT apply(Object input) {
+	public OUT apply(IN input) {
 		return transform(input);
 	}
 
