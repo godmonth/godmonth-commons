@@ -4,7 +4,9 @@ import org.apache.commons.collections4.Transformer;
 import org.apache.commons.lang3.StringUtils;
 import org.dozer.Mapper;
 
-public class DozerTransformer<OUT> implements Transformer<Object, OUT> {
+import com.google.common.base.Function;
+
+public class DozerTransformer<OUT> implements Transformer<Object, OUT>, Function<Object, OUT> {
 	private Mapper mapper;
 	private Class<OUT> clazz;
 	private final String mapId;
@@ -25,6 +27,11 @@ public class DozerTransformer<OUT> implements Transformer<Object, OUT> {
 		} else {
 			return mapper.map(input, clazz);
 		}
+	}
+
+	@Override
+	public OUT apply(Object input) {
+		return transform(input);
 	}
 
 }
