@@ -14,7 +14,7 @@ import com.google.common.collect.Maps;
 public class List2MapFactoryBean<KEY, VALUE> implements FactoryBean<Map<KEY, VALUE>>, InitializingBean {
 	private List<VALUE> sourceList;
 	private String propertyPath;
-	private Map<KEY, VALUE> map;
+	protected Map<KEY, VALUE> map;
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
