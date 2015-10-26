@@ -23,6 +23,12 @@
 		<developerConnection>scm:git:git@github.com:godmonth/godmonth-commons.git</developerConnection>
 		<url>https://github.com/godmonth/godmonth-commons</url>
 	</scm>
+	<distributionManagement>
+		<snapshotRepository>
+			<id>ossrh</id>
+			<url>https://oss.sonatype.org/content/repositories/snapshots</url>
+		</snapshotRepository>
+	</distributionManagement>
 	<build>
 		<plugins>
 			<plugin>
