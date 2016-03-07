@@ -19,15 +19,12 @@ public class ObjectMapperFactoryBean extends Jackson2ObjectMapperFactoryBean {
 	public void afterPropertiesSet() {
 		super.afterPropertiesSet();
 		if (camel) {
-			getObject()
-					.setPropertyNamingStrategy(
-							PropertyNamingStrategy.CAMEL_CASE_TO_LOWER_CASE_WITH_UNDERSCORES);
+			getObject().setPropertyNamingStrategy(PropertyNamingStrategy.SNAKE_CASE);
 		}
 		getObject().setSerializationInclusion(Include.NON_NULL);
 		if (CollectionUtils.isNotEmpty(mixins)) {
 			for (Mixin mixin : mixins) {
-				getObject().addMixInAnnotations(mixin.getTarget(),
-						mixin.getMixinSource());
+				getObject().addMixIn(mixin.getTarget(), mixin.getMixinSource());
 			}
 		}
 
