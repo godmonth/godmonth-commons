@@ -2,7 +2,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.godmonth</groupId>
 	<artifactId>godmonth-commons</artifactId>
-	<version>0.9.1-SNAPSHOT</version>
+	<version>0.9.1</version>
 	<url>https://github.com/godmonth/godmonth-commons</url>
 	<developers>
 		<developer>
