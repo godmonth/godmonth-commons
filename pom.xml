@@ -324,4 +324,6 @@
 		</profile>
 	</profiles>
 
+	<name>godmonth commons</name>
+	<description>godmonth commons</description>
 </project>
