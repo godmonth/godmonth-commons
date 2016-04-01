@@ -22,6 +22,7 @@ public class EndlessTaskTest {
 		Thread.sleep(100);
 		List<Runnable> shutdownNow = es.shutdownNow();
 		Assert.assertTrue(shutdownNow.isEmpty());
+		System.out.println(es.isTerminated());
 		boolean awaitTermination = es.awaitTermination(1000, TimeUnit.SECONDS);
 		Assert.assertTrue(awaitTermination);
 	}
@@ -32,14 +33,14 @@ public class EndlessTaskTest {
 
 			@Override
 			public void run() {
-				
+
 			}
 		}, 0);
 		ExecutorService es = Executors.newFixedThreadPool(1);
 		es.execute(et);
-		
+
 		Thread.sleep(100);
-		
+
 		List<Runnable> shutdownNow = es.shutdownNow();
 		Assert.assertTrue(shutdownNow.isEmpty());
 		boolean awaitTermination = es.awaitTermination(1000, TimeUnit.SECONDS);
