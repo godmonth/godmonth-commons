@@ -19,8 +19,7 @@ public class EndlessTask implements StoppableTask {
 		this(runnable, sleepTime, false);
 	}
 
-	public EndlessTask(Runnable runnable, int sleepTime,
-			boolean breakOnException) {
+	public EndlessTask(Runnable runnable, int sleepTime, boolean breakOnException) {
 		this.runnable = runnable;
 		this.sleepTime = sleepTime;
 		this.breakOnException = breakOnException;
@@ -35,37 +34,36 @@ public class EndlessTask implements StoppableTask {
 	}
 
 	public void run() {
-		try {
-			while (true) {
+		while (true) {
+			if (shutdown) {
+				break;
+			}
+			try {
+				runnable.run();
+			} catch (RuntimeException e) {
+				if (breakOnException) {
+					throw e;
+				} else {
+					logger.warn(null, e);
+				}
+			}
+
+			if (Thread.currentThread().isInterrupted()) {
+				logger.info("interrupted");
+				break;
+			}
+
+			if (sleepTime > 0) {
 				if (shutdown) {
 					break;
 				}
-
 				try {
-					runnable.run();
-				} catch (RuntimeException e) {
-					if (breakOnException) {
-						throw e;
-					} else {
-						logger.warn(null, e);
-					}
-				}
-
-				if (Thread.currentThread().isInterrupted()) {
-					logger.info("interrupted");
-					break;
-				}
-
-				if (sleepTime > 0) {
-					if (shutdown) {
-						break;
-					}
 					Thread.sleep(sleepTime);
+				} catch (InterruptedException e) {
+					logger.info(e.getMessage());
 				}
-
 			}
-		} catch (InterruptedException e) {
-			logger.info(e.getMessage());
+
 		}
 
 	}
