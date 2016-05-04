@@ -4,14 +4,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import jodd.bean.BeanUtil;
-
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.beans.factory.FactoryBean;
 import org.springframework.beans.factory.InitializingBean;
 
 import com.google.common.base.Function;
 import com.google.common.collect.Maps;
+
+import jodd.bean.BeanUtil;
 
 public class List2MapFactoryBean<KEY, VALUE> implements FactoryBean<Map<KEY, VALUE>>, InitializingBean {
 	private List<VALUE> sourceList;
@@ -29,7 +29,7 @@ public class List2MapFactoryBean<KEY, VALUE> implements FactoryBean<Map<KEY, VAL
 			@SuppressWarnings("unchecked")
 			@Override
 			public KEY apply(VALUE input) {
-				return (KEY) BeanUtil.getProperty(input, propertyName);
+				return (KEY) BeanUtil.silent.getProperty(input, propertyName);
 			}
 
 		};
