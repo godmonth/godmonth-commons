@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.lang3.Validate;
 import org.springframework.beans.factory.FactoryBean;
 import org.springframework.beans.factory.InitializingBean;
 
@@ -20,6 +21,7 @@ public class List2MapFactoryBean<KEY, VALUE> implements FactoryBean<Map<KEY, VAL
 
 	@Override
 	public void afterPropertiesSet() throws Exception {
+		Validate.notBlank(propertyPath, "propertyPath is blank");
 		map = list2Map(sourceList, propertyPath);
 	}
 
