@@ -1,6 +1,7 @@
 package com.godmonth.util.jackson;
 
 import java.io.IOException;
+import java.util.Collection;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.Validate;
@@ -12,9 +13,10 @@ import org.springframework.beans.factory.annotation.Required;
 import org.springframework.core.io.Resource;
 
 import com.fasterxml.jackson.core.JsonParseException;
-import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.type.CollectionLikeType;
+import com.fasterxml.jackson.databind.type.TypeFactory;
 
 /**
  * @author shenyue
@@ -22,13 +24,18 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class JacksonObjectFactoryBean<T> implements FactoryBean<T>, InitializingBean {
 
 	private static final Logger logger = LoggerFactory.getLogger(JacksonObjectFactoryBean.class);
+
 	private String json;
+
 	private Resource jsonResource;
+
 	private ObjectMapper objectMapper;
+
 	private Class<T> objectType;
-	private TypeReference<?> typeReference;
+
 	private T object;
-	private boolean singleton = true;
+
+	private Class<? extends Collection<T>> collectionType;
 
 	@Override
 	public void afterPropertiesSet() throws JsonParseException, JsonMappingException, IOException {
@@ -37,31 +44,22 @@ public class JacksonObjectFactoryBean<T> implements FactoryBean<T>, Initializing
 		}
 		Validate.notBlank(json, "json is blank");
 		logger.trace("jsonResource:{},content:{}", jsonResource.getDescription(), json);
-		if (singleton) {
-			object = initialValue();
-		}
-	}
-
-	public void setJson(String json) {
-		this.json = json;
+		object = initialValue();
 	}
 
 	private T initialValue() throws JsonParseException, JsonMappingException, IOException {
-		if (typeReference != null) {
-			object = objectMapper.readValue(json, typeReference);
+		if (collectionType != null) {
+			TypeFactory typeFactory = objectMapper.getTypeFactory();
+			CollectionLikeType collectionLikeType = typeFactory.constructCollectionLikeType(collectionType, objectType);
+			return objectMapper.readValue(json, collectionLikeType);
 		} else {
-			object = objectMapper.readValue(json, objectType);
+			return objectMapper.readValue(json, objectType);
 		}
-		return object;
 	}
 
 	@Override
 	public T getObject() throws Exception {
-		if (singleton) {
-			return object;
-		} else {
-			return initialValue();
-		}
+		return object;
 	}
 
 	@Override
@@ -79,17 +77,21 @@ public class JacksonObjectFactoryBean<T> implements FactoryBean<T>, Initializing
 		this.objectMapper = objectMapper;
 	}
 
-	@Required
 	public void setJsonResource(Resource jsonResource) {
 		this.jsonResource = jsonResource;
 	}
 
+	public void setJson(String json) {
+		this.json = json;
+	}
+
+	@Required
 	public void setObjectType(Class<T> objectType) {
 		this.objectType = objectType;
 	}
 
-	public void setTypeReference(TypeReference<?> typeReference) {
-		this.typeReference = typeReference;
+	public void setCollectionType(Class<? extends Collection<T>> collectionType) {
+		this.collectionType = collectionType;
 	}
 
 }
