@@ -2,6 +2,12 @@ package com.godmonth.util.lang;
 
 import java.nio.ByteBuffer;
 
+/**
+ * @deprecated use guava Ints,Longs instead
+ * @author shwh1
+ *
+ */
+@Deprecated
 public class BigEndianUtils {
 	public static final byte[] EMPTY_BYTE_ARRAY = new byte[0];
 
