@@ -10,7 +10,9 @@ import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 
 /**
  * @author shenyue
+ * @deprecated use setMixIns and PropertyNamingStrategy
  */
+@Deprecated
 public class ObjectMapperFactoryBean extends Jackson2ObjectMapperFactoryBean {
 	private boolean camel;
 	private List<Mixin> mixins;
