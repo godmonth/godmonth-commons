@@ -4,4 +4,7 @@ target
 .settings
 bin
 test-output
-
+*.iml
+.idea
+/pom.xml.releaseBackup
+/release.properties
