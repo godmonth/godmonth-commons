@@ -127,13 +127,7 @@
 					<show>private</show>
 				</configuration>
 			</plugin>
-			<plugin>
-				<artifactId>maven-jxr-plugin</artifactId>
-				<configuration>
-					<inputEncoding>utf-8</inputEncoding>
-					<outputEncoding>utf-8</outputEncoding>
-				</configuration>
-			</plugin>
+
 		</plugins>
 	</reporting>
 	<dependencyManagement>
